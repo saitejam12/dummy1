@@ -1,0 +1,22 @@
+.header {
+  background: #999999;
+  font-size: 16px;
+  height: 30px;
+  padding: 10px;
+  text-align: center;
+}
+
+.footer {
+  border: 1px solid grey;
+  border-radius: 0.3rem;
+  margin: none;
+}
+
+.footerTitle {
+  padding-left: 0.5rem;
+}
+
+.footerValue {
+  float: right;
+  padding-right: 0.5rem;
+}
