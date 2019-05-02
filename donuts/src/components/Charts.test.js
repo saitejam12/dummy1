@@ -7,7 +7,6 @@ import { store } from "../store";
 import data from "../data/givenData";
 
 it("renders without crashing", () => {
-  // let store ={};
   let props = {
     getData: jest.fn(),
     userValues: {}
@@ -24,7 +23,6 @@ it("renders without crashing", () => {
 });
 
 it("Should have Task Components", () => {
-  // let store ={};
   let props = {
     getData: jest.fn(),
     userValues: {}
