@@ -40,6 +40,8 @@ class Task extends Component {
   };
   getDoughNut = () => {
     const percents = this.getPercentage();
+
+    //Work Around method suggested by ChartJs Library forum for Text inside Doughnut chart starts here /-----
     const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
     Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
       draw: function() {
@@ -61,7 +63,8 @@ class Task extends Component {
         ctx.fillText(text, textX, textY);
       }
     });
-    console.log(percents[0]);
+    // ends here /-------
+
     const data = {
       labels: ["Completed %", "Remaining %"],
       datasets: [
