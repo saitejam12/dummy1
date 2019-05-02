@@ -25,6 +25,7 @@ const ProgressData = props => {
 class Task extends Component {
   getPercentage = () => {
     let calculatePercentage = [];
+    // eslint-disable-next-line array-callback-return
     this.props.taskData.summary.map(summary => {
       if (summary.title === COMPLETED) {
         calculatePercentage[0] = Math.round(
@@ -37,16 +38,19 @@ class Task extends Component {
     return calculatePercentage;
   };
   getDoughNut = () => {
+    const percents = this.getPercentage();
     const data = {
+      responsive: true,
       labels: ["Completed %", "Remaining %"],
       datasets: [
         {
-          data: this.getPercentage(),
-          backgroundColor: ["#36a2be", "#fffeee"],
-          borderColor: "#ddd"
+          data: percents,
+          backgroundColor: ["#36a2de", "#ffffee"],
+          borderColor: "#cccccc"
         }
       ]
     };
+
     return data;
   };
 
@@ -59,7 +63,10 @@ class Task extends Component {
             {taskData.title}
           </Card.Header>
           <Card.Body>
-            <Doughnut data={this.getDoughNut()} />
+            <Doughnut
+              data={this.getDoughNut()}
+              text={this.getPercentage()[0]}
+            />
           </Card.Body>
           <ProgressData data={taskData} />
         </Card>
