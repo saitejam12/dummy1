@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card } from "react-bootstrap";
-import { Doughnut } from "react-chartjs-2";
+import { Chart, Doughnut } from "react-chartjs-2";
 import "./Task.css";
 
 const COMPLETED = "Completed";
@@ -39,16 +40,40 @@ class Task extends Component {
   };
   getDoughNut = () => {
     const percents = this.getPercentage();
+    const originalDoughnutDraw = Chart.controllers.doughnut.prototype.draw;
+    Chart.helpers.extend(Chart.controllers.doughnut.prototype, {
+      draw: function() {
+        originalDoughnutDraw.apply(this, arguments);
+
+        var chart = this.chart.chart;
+        var ctx = chart.ctx;
+        var width = chart.width;
+        var height = chart.height;
+
+        var fontSize = (height / 150).toFixed(2);
+        ctx.font = fontSize + "em Arial";
+        ctx.textBaseline = "middle";
+
+        var text = chart.config.data.text,
+          textX = Math.round((width - ctx.measureText(text).width) / 2),
+          textY = height / 1.65;
+
+        ctx.fillText(text, textX, textY);
+      }
+    });
+    console.log(percents[0]);
     const data = {
-      responsive: true,
       labels: ["Completed %", "Remaining %"],
       datasets: [
         {
           data: percents,
           backgroundColor: ["#36a2de", "#ffffee"],
-          borderColor: "#cccccc"
+          borderColor: "#cccccc",
+          responsive: true
         }
-      ]
+      ],
+      text: percents[0] + "%",
+      weight: 0.5
     };
 
     return data;
@@ -65,7 +90,10 @@ class Task extends Component {
           <Card.Body>
             <Doughnut
               data={this.getDoughNut()}
-              text={this.getPercentage()[0]}
+              options={{
+                maintainAspectRatio: true,
+                responsive: true
+              }}
             />
           </Card.Body>
           <ProgressData data={taskData} />

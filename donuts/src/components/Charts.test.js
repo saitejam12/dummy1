@@ -6,6 +6,12 @@ import { Provider } from "react-redux";
 import { store } from "../store";
 import data from "../data/givenData";
 
+window.HTMLCanvasElement.prototype.getContext = () => {};
+
+jest.mock("react-chartjs-2", () => ({
+  Doughnut: () => null
+}));
+
 it("renders without crashing", () => {
   let props = {
     getData: jest.fn(),

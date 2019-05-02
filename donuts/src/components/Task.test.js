@@ -5,6 +5,12 @@ import "../data/setupTests";
 import { Provider } from "react-redux";
 import { store } from "../store";
 
+window.HTMLCanvasElement.prototype.getContext = () => {};
+
+jest.mock("react-chartjs-2", () => ({
+  Doughnut: () => null
+}));
+
 it("renders without crashing", () => {
   // let store ={};
   let props = {

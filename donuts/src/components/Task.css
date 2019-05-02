@@ -8,15 +8,15 @@
 
 .footer {
   border: 1px solid grey;
-  border-radius: 0.3rem;
+  border-radius: 0.2rem;
   margin: none;
 }
 
 .footerTitle {
-  padding-left: 0.5rem;
+  padding-left: 1rem;
 }
 
 .footerValue {
   float: right;
-  padding-right: 0.5rem;
+  padding-right: 1rem;
 }
