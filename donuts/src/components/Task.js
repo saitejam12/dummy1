@@ -47,16 +47,16 @@ class Task extends Component {
       draw: function() {
         originalDoughnutDraw.apply(this, arguments);
 
-        var chart = this.chart.chart;
-        var ctx = chart.ctx;
-        var width = chart.width;
-        var height = chart.height;
+        let chart = this.chart.chart;
+        let ctx = chart.ctx;
+        let width = chart.width;
+        let height = chart.height;
 
-        var fontSize = (height / 150).toFixed(2);
+        let fontSize = (height / 150).toFixed(2);
         ctx.font = fontSize + "em Arial";
         ctx.textBaseline = "middle";
 
-        var text = chart.config.data.text,
+        let text = chart.config.data.text,
           textX = Math.round((width - ctx.measureText(text).width) / 2),
           textY = height / 1.65;
 
